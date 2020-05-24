@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import fire from './config/Fire';
+import { Link } from 'react-router-dom'
 
 class Login extends Component {
   constructor(props) {
@@ -13,6 +14,10 @@ class Login extends Component {
     };
   }
 
+  redirect(){
+    this.props.history.push('/Home');
+}
+
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -23,6 +28,7 @@ class Login extends Component {
     }).catch((error) => {
         console.log(error);
       });
+    
   }
 
   signup(e){
@@ -46,12 +52,13 @@ class Login extends Component {
       <label for="exampleInputPassword1">Password</label>
       <input value={this.state.password} onChange={this.handleChange} type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
       </div>
-      <button type="submit" onClick={this.login} class="btn btn-primary">Login</button>
-      <button onClick={this.signup} style={{marginLeft: '25px'}} className="btn btn-success">Signup</button>
+      <button type="submit" onClick={this.login} class="btn btn-primary">
+      <Link to ='/Home'>Login</Link>
+      </button>
  </form>
  
  </div>
     );
   }
 }
-export default Login;
+export default (Login);

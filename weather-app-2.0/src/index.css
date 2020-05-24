@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +10,152 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.app-background{
+  background-image: url("./weather.jpeg3.jpg");
+  background-size: cover;
+  background-position: bottom;
+  /* height: 100%; */
+
+}
+
+
+main {
+  /* dont change from vh  */
+  height: 100vh;
+  padding: 20px;
+}
+
+.title {
+  color: white;
+  font-size: 102px;
+  text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
+  text-align: center;
+  margin: 10px;
+  font-style: italic;
+}
+
+.search-box .search-bar {
+  width: 40%;
+  height: 40px;
+  padding: 10px;
+  box-shadow: 10px 10px 8px rgb(18,40,87);
+  font-size: 19px;
+
+  border: solid 2px black;
+  border-radius: 15px;
+  background-position: left top;
+  background-repeat: repeat;
+}
+
+.search-box {
+  width: 100%;
+  margin-bottom: 60px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif ;
+}
+
+.location-box .location {
+  color: white;
+  font-size: 32px;
+  text-align: center;
+  text-shadow: 2px 2px rgb(18,40,87);
+}
+
+.location-box .date {
+  color: white;
+  text-align: center;
+  font-size: 45px;
+  text-shadow: 2px 2px rgb(18,40,87);
+  padding: 5px;
+  font-style: oblique;
+}
+
+.weather-box .weather {
+  color: white;
+  font-size: 48px;
+  font-weight: 700;
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+}
+
+.weather-box .temperature {
+  color: white;
+  font-size: 102px;
+
+  position: relative;
+  display: inline-block;
+  
+  /* tempurature shadow  */
+  text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
+  text-align: center;
+  padding: 15px 25px;
+}
+
+.weather-box .weather-type {
+  color: white;
+  font-size: 48px;
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+  font-style: oblique;
+}
+
+.weather-box {
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+.main-div {
+  width: 20%;
+  margin: 0px auto;
+  margin-top: 150px;
+  padding: 20px;
+}
+.main-div input {
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  padding: 15px;
+  outline: none;
+  width: 100%;
+  margin-bottom: 20px;
+  transition: 0.3s;
+
+}
+
+
+.main-div button {
+  background: #5d8ffc;
+  color: #fff;
+  border: 1px solid #5d8ffc;
+  border-radius: 5px;
+  padding: 15px;
+  display: block;
+  width: 100%;
+  transition: 0.3s;
+
+}
+.main-div button:hover {
+  background: #fff;
+  color: #5d8ffc;
+  border: 1px solid #5d8ffc;
+  cursor: pointer;
 }

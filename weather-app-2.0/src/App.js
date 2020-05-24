@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { BrowserRouter } from 'react-router-dom'
+import Router from './Routes'
 import './App.css';
 import fire from './config/Fire';
 import Home from './Home';
@@ -33,12 +35,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.user ? (
-          <Home />
+        {/* {this.state.user ? (
+          <Login/>
         ) :
           (
-            <Login />
-          )}
+            <Home />
+          )} */}
+
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+
       </div>
     );
   }
