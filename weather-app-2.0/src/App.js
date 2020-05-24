@@ -29,10 +29,19 @@ class App extends Component {
       }
     });
   }
+
   render() {
     return (
-     <div>{this.state.user ? : ( <Home/>) : (<Login />)}</div>
-}
+      <div className="App">
+        {this.state.user ? (
+          <Home />
+        ) :
+          (
+            <Login />
+          )}
+      </div>
+    );
+  }
 }
 
- export default App;
+export default App;
