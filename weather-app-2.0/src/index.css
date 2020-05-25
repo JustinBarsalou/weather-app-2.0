@@ -17,6 +17,7 @@ code {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-align: center;
 }
 
 body {
@@ -153,9 +154,36 @@ main {
   transition: 0.3s;
 
 }
+ .Login {
+  color: white;
+  text-decoration: none;
+}
 .main-div button:hover {
   background: #fff;
   color: #5d8ffc;
   border: 1px solid #5d8ffc;
   cursor: pointer;
+}
+
+
+
+
+
+html {
+  width: 100%;
+  height: 100%;
+
+}
+
+
+form {
+  text-align: center;
+}
+
+.FORM {
+  text-align: center;
+}
+
+.center {
+  padding: 2% 5% 2% 5%;
 }

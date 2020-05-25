@@ -1,95 +1,85 @@
-import React, { Component } from 'react';
-import { useState } from 'react'
+import React from "react";
+
+import Titles from "./components/Titles";
+import Form from "./components/Form";
+import Weather from "./components/Weather";
 import fire from './config/Fire';
 
 
-const api = {
-  key: "2e967a06c90ff16ac5be7261e5f206db",
-  baseURL: "https://api.openweathermap.org/data/2.5/"
-}
+const API_KEY = "2e967a06c90ff16ac5be7261e5f206db";
+
+// this.logout = this.logout.bind(this);
+class App extends React.Component {
+  state = {
+    temperature: undefined,
+    city: undefined,
+    country: undefined,
+    humidity: undefined,
+    description: undefined,
+    error: undefined
+  }
 
 
-const Home = (props) => {
+  logout() {
+        fire.auth().signOut();
+    }
 
-
-  const [query, setQuery] = useState('');
-  const [weather, setWeather] = useState({});
-
-  // search function
-  const search = evt => {
-    // whatever is in the search bar is put into query upon enter
-    if (evt.key === "Enter") {
-      // putting together the api call 
-      fetch(`${api.baseURL}weather?q=${query}&units=metric&APPID=${api.key}`)
-        .then(res => res.json())
-        .then(result => {
-          setWeather(result);
-          // reset the query when all is done
-          setQuery('');
-          // console.log(result);
-        });
+  getWeather = async (e) => {
+    e.preventDefault();
+    const city = e.target.elements.city.value;
+    const country = e.target.elements.country.value;
+    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=metric`);
+    const data = await api_call.json();
+    if (city && country) {
+      this.setState({
+        temperature: data.main.temp,
+        city: data.name,
+        country: data.sys.country,
+        humidity: data.main.humidity,
+        description: data.weather[0].description,
+        error: ""
+      });
+    } else {
+      this.setState({
+        temperature: undefined,
+        city: undefined,
+        country: undefined,
+        humidity: undefined,
+        description: undefined,
+        error: "Please enter the values."
+      });
     }
   }
-  
-  // function to create a date
-  const createDate = (d) => {
+  render() {
+    return (
+      <div>
+        <div className="wrapper">
+          <div className="main">
+            <div className="container">
+              <div className="row">
+                <div className="col-xs-5 title-container">
+                  <Titles />
+                </div>
+                <div className="col-xs-7 form-container">
+                  <Form getWeather={this.getWeather} />
+                  <Weather 
+                    temperature={this.state.temperature} 
+                    humidity={this.state.humidity}
+                    city={this.state.city}
+                    country={this.state.country}
+                    description={this.state.description}
+                    error={this.state.error}
+                  />
+                </div>
+                <button onClick={this.logout}>Logout</button>
 
-    let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    
-    let date = d.getDate();
-    let day = days[d.getDay()];
-    let year = d.getFullYear();
-    let month = months[d.getMonth()];
-    // concatenate values 
-    let result = `${day} ${date} ${month} ${year}`;
-
-    return result;
-  }
-
-
-//   const logout = () => {
-//     fire.auth().signOut();
-// }
-
-
-  return (
-    <div className="App app-background">
-    <main>
-      <div className='title'>
-        Weather App
-      </div>
-
-      <div className='search-box'>
-        <input 
-        type='text' 
-        className='search-bar' 
-        placeholder='Search' 
-        onChange={e => setQuery(e.target.value)} 
-        value={query} 
-        onKeyPress={search}/>
-      </div>
-
-      {/* if the weather has not been determined yet */}
-      {(typeof weather.main != "undefined") ? (
-        <div> 
-          <div className="location-box">
-            <div className='location'>{weather.name}, {weather.sys.country}</div>
-            <div className='date'>{createDate(new Date())}</div>
-          </div>
-
-          <div className='weather-box'>
-            {/* had to convert to standard instead of metric  */}
-            <div className='temperature'>{Math.round((weather.main.temp) * 1.8 + 32)}°F</div>
-            <div className='weather-type'>{weather.weather[0].main}</div>
+              </div>
+            </div>
           </div>
         </div>
-        // else nothing 
-        ) : ('')}
-    </main>
-    </div>
-  );
-
+      </div>
+    );
   }
+};
 
-  export default Home;
+export default App;
